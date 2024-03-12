@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Report  ZDE_OKTD_04_IKI
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zde_oktd_04_iki.
+
+TYPES: BEGIN OF countries,
+  id TYPE i,
+  name TYPE c LENGTH 40,
+  continent TYPE c LENGTH 30,
+  END OF countries.
+
+DATA: c1 TYPE countries,
+      c2 TYPE countries,
+      c3 TYPE countries.
+
+c1-id = 1.
+c1-name = 'Hungary'.
+c1-continent = 'EUROPE'.
+
+c2-id = 2.
+c2-name = 'CHINA'.
+c2-continent = 'ASIA'.
+
+WRITE: /10 c2-id, c2-name, c2-continent.
+
+MOVE-CORRESPONDING c1 TO c3.
+
+WRITE: /10 c3-id, c3-name, c3-continent.
