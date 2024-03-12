@@ -1,0 +1,111 @@
+*&---------------------------------------------------------------------*
+*& Report  ZDE_OKTD_05_IKI
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zde_oktd_05_iki.
+
+DATA: BEGIN OF sor,
+  sorszam TYPE i,
+  kod TYPE i,
+  nev TYPE c LENGTH 20,
+  mennyiseg TYPE c LENGTH 2,
+  END OF sor.
+
+DATA: tabla LIKE STANDARD TABLE OF sor,
+      db TYPE i.
+
+DO 3 TIMES.
+  sor-sorszam = sy-index.
+  sor-kod = sy-index ** 2.
+  sor-nev = 'alma'.
+  sor-mennyiseg = 'kg'.
+  APPEND sor TO tabla.
+ENDDO.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+LOOP AT tabla INTO sor.
+  sor-sorszam = sy-tabix.
+  sor-kod = sy-tabix * 3.
+  sor-nev = 'korte'.
+  sor-mennyiseg = 'kg'.
+  INSERT sor INTO tabla.
+ENDLOOP.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+sor-sorszam = 3.
+sor-kod = 9.
+sor-nev = 'rostos-narancs'.
+sor-mennyiseg = 'L'.
+INSERT sor INTO tabla INDEX 2.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+LOOP AT tabla INTO sor.
+  IF sor-sorszam = 3.
+    sor-kod = 18.
+    sor-nev = 'narancsle'.
+    sor-mennyiseg = 'L'.
+    MODIFY tabla FROM sor.
+  ENDIF.
+ENDLOOP.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+LOOP AT tabla INTO sor.
+  IF sor-nev = 'alma'.
+    db = db + 1.
+  ENDIF.
+ENDLOOP.
+
+WRITE: / 'alma:', db.
+
+ULINE.
+
+SORT tabla BY nev.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+LOOP AT tabla INTO sor WHERE kod = 4.
+  DELETE tabla.
+
+ENDLOOP.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
+
+LOOP at tabla into sor .
+  if sor-mennyiseg = 'kg'.
+    sor-mennyiseg = 'db'.
+    modify tabla from sor.
+    endif.
+
+
+endloop.
+
+LOOP AT tabla INTO sor.
+  WRITE: / sor-sorszam, sor-kod, sor-nev, sor-mennyiseg.
+ENDLOOP.
+ULINE.
