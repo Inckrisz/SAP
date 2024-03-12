@@ -1,0 +1,26 @@
+*&---------------------------------------------------------------------*
+*& Report  ZDE_OKTD_03_IKI
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT zde_oktd_03_iki.
+
+DATA str(30) VALUE 'ABAP programozást tanulunk'.
+DATA: s1(5), s2(15), s3(10), s4(8) VALUE 'A_B_A_P'.
+DATA: len1 TYPE i, len2 TYPE i, len3 TYPE i.
+SPLIT str AT ' ' INTO s1 s2 s3.
+len1 = strlen( s1 ).
+len2 = strlen( s2 ).
+len3 = strlen( s3 ).
+WRITE: /10 s1, 30 len1,
+/10 s2, 30 len2,
+/10 s3, 30 len3.
+REPLACE 'ABAP' IN str WITH s4.
+CONCATENATE str '.' INTO str.
+WRITE /10 str.
+TRANSLATE str TO UPPER CASE.
+CONDENSE str NO-GAPS.
+WRITE /10 str COLOR 6 INTENSIFIED OFF.
